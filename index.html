@@ -1,0 +1,92 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Bober Tech</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Макет: страница как ответ бота: команда, сообщение и кнопки под ним */
+:root{
+  --bg:#dcece6; --surface:#ffffff; --fg:#10302a; --muted:#4d6b64; --accent:#0d6f5e; --on-accent:#ffffff;
+  --amber:#f4ab3c; --on-amber:#2b1c02; --dot:#c1dcd3;
+  --body:"Rubik",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b1b18; --surface:#142c27; --fg:#e6f5f0; --muted:#98b8b0; --accent:#4fd1b5; --on-accent:#06201a;
+  --amber:#f4ab3c; --on-amber:#2b1c02; --dot:#17332d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b1b18; --surface:#142c27; --fg:#e6f5f0; --muted:#98b8b0; --accent:#4fd1b5; --on-accent:#06201a;
+  --amber:#f4ab3c; --on-amber:#2b1c02; --dot:#17332d; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg) radial-gradient(var(--dot) 2px,transparent 2.5px) 0 0/24px 24px;color:var(--fg);font:16px/1.5 var(--body)}
+main{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:12px;padding-block:40px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,p{margin:0}
+.cmd{align-self:flex-end;background:var(--accent);color:var(--on-accent);font:600 15px var(--mono);padding:10px 16px;border-radius:18px 18px 4px 18px}
+.msg{background:var(--surface);border-radius:20px 20px 20px 4px;padding:28px 24px;display:flex;flex-direction:column;gap:8px}
+h1{font-size:clamp(56px,18vw,88px);font-weight:800;line-height:1;letter-spacing:-.03em}
+.role{font-size:20px;color:var(--muted);text-wrap:balance}
+.works{display:flex;align-items:baseline;gap:12px;margin-top:16px;padding-top:16px;border-top:2px dashed var(--dot)}
+.works b{font:600 52px/1 var(--mono);color:var(--accent)}
+.works span{font-size:20px;font-weight:500}
+nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+a{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;padding:14px 10px;border-radius:12px;
+  background:var(--surface);color:var(--fg);text-decoration:none;font-weight:700;border:2px solid transparent;transition:transform .15s,border-color .15s}
+a small{font:400 12px var(--mono);overflow-wrap:anywhere;opacity:.8}
+a:hover{border-color:var(--accent);transform:translateY(-2px)}
+a.order{grid-column:1/-1;background:var(--amber);color:var(--on-amber);font-size:20px;padding-block:18px}
+a{position:relative}
+a:hover,a:focus-visible{z-index:2}
+.tip{position:absolute;top:calc(100% + 10px);left:50%;width:max-content;max-width:100%;background:var(--fg);color:var(--bg);
+  font:500 14px/1.35 var(--body);padding:9px 14px;border-radius:10px;pointer-events:none;
+  opacity:0;visibility:hidden;transform:translate(-50%,-12px);transition:opacity .2s,transform .25s,visibility .25s}
+.tip::before{content:"";position:absolute;bottom:100%;left:50%;margin-left:-7px;border:7px solid transparent;border-bottom-color:var(--fg)}
+a:hover .tip,a:focus-visible .tip{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media (hover:none){
+  .tip{position:static;width:auto;transform:none;opacity:1;visibility:visible;margin-top:8px;background:none;color:inherit;padding:0}
+  .tip::before{display:none}
+  a:hover .tip,a:focus-visible .tip{transform:none}
+}
+.brief{margin-top:12px;background:var(--surface);border-radius:20px 20px 20px 4px;padding:24px}
+.brief h2{margin:0 0 16px;font-size:22px;line-height:1.25;text-wrap:balance}
+.brief ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.brief b{display:block;font:600 14px var(--mono);color:var(--accent)}
+.brief span{color:var(--muted)}
+.nick{position:relative}
+h1{width:fit-content;cursor:pointer;text-decoration:underline dotted var(--accent);text-decoration-thickness:4px;text-underline-offset:10px}
+h1:focus-visible{outline:3px solid var(--accent);outline-offset:6px}
+.about{position:absolute;z-index:3;top:calc(100% + 20px);left:0;right:0;background:var(--fg);color:var(--bg);padding:16px 18px;border-radius:14px;
+  display:flex;flex-direction:column;gap:6px;pointer-events:none;opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .2s,transform .25s,visibility .25s}
+.about::before{content:"";position:absolute;bottom:100%;left:28px;border:8px solid transparent;border-bottom-color:var(--fg)}
+.about b{font-size:18px}
+h1:hover + .about,h1:focus + .about{opacity:1;visibility:visible;transform:none}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media (max-width:360px){nav{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){a,.tip,.about{transition:none}a:hover{transform:none}}
+</style>
+
+<main>
+  <div class="cmd">/start</div>
+  <section class="msg">
+    <div class="nick">
+      <h1 tabindex="0" aria-describedby="about">Бобер</h1>
+      <div class="about" id="about" role="tooltip"><b>Эксперт высокого качества</b><p>Почти каждым его ботом пользуются более 10&nbsp;000 людей.</p><p>Суммарно у его ботов около 200&nbsp;000 пользователей.</p></div>
+    </div>
+    <p class="role">Эксперт по созданию Telegram-ботов</p>
+    <p class="works"><b>20+</b><span>работ</span></p>
+  </section>
+  <nav aria-label="Ссылки">
+    <a class="order" href="https://t.me/Bober_magaz_bot" target="_blank" rel="noopener">Заказать бота<small>личка: @Bober_magaz_bot</small><span class="tip">Переходи в личку и заказывай бота</span></a>
+    <a href="https://t.me/bober_tech1" target="_blank" rel="noopener">Telegram-канал<small>@bober_tech1</small><span class="tip">Переходи в Telegram-канал</span></a>
+    <a href="https://www.tiktok.com/@bobertech_tt" target="_blank" rel="noopener">TikTok<small>@bobertech_tt</small><span class="tip">Переходи в TikTok</span></a>
+  </nav>
+  <section class="brief">
+    <h2>Что написать в личку</h2>
+    <ul>
+      <li><b>Задача</b><span>Что бот должен делать и для кого он.</span></li>
+      <li><b>Кнопки и команды</b><span>Какие действия нужны пользователю.</span></li>
+      <li><b>Пример</b><span>Бот, который тебе нравится, если такой есть.</span></li>
+      <li><b>Срок и бюджет</b><span>Когда нужен бот и на какую сумму рассчитываешь.</span></li>
+    </ul>
+  </section>
+</main>
+
+</body></html>
